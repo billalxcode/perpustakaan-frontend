@@ -1,7 +1,10 @@
+"use client"
 import Link from "next/link";
 import { CgHomeAlt } from "react-icons/cg";
 import { FaBookBookmark, FaBookmark } from "react-icons/fa6";
 import NavProfile from "./profile";
+import useAuth from "@/states/features/auth/hooks";
+import { Button } from "../button";
 
 export const navMenuLinks = [
   { name: "Home", href: "/", icon: CgHomeAlt, active: true },
@@ -10,6 +13,8 @@ export const navMenuLinks = [
 ];
 
 export default function NavMenu() {
+  const { isAuthenticated } = useAuth();
+
   const activeLink = "bg-primary text-primary-foreground";
   return (
     <div className="flex flex-row gap-4 items-center">
@@ -27,7 +32,24 @@ export default function NavMenu() {
         ))}
       </ul>
 
-      <NavProfile />
+      {
+        isAuthenticated ? (
+          <NavProfile />
+        ) : (
+          <div className="flex flex-row gap-2">
+            <Link href="/register">
+              <Button>
+                Register
+                </Button>
+            </Link>
+            <Link href="/login">
+              <Button>
+                Login
+              </Button>
+            </Link>
+          </div>
+        )
+      }
     </div>
   );
 }
