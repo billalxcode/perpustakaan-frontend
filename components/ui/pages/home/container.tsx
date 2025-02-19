@@ -4,7 +4,7 @@ import ProfileWrapper from './profile'
 
 export default function HomeContainer() {
   return (
-    <div className="p-4 flex flex-row gap-8 justify-between">
+    <div className="p-4 flex flex-row gap-4 w-full justify-between">
         <BooksWrapper />
         <ProfileWrapper />
     </div>
